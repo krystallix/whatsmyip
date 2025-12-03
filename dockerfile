@@ -1,10 +1,10 @@
 # Build stage
-FROM golang:1.22-alpine AS build
+FROM golang:1.21-alpine AS build
 
 WORKDIR /app
 COPY . .
 
-RUN go build -o identme main.go
+RUN go build -o whatsmyip main.go
 
 # Final stage
 FROM alpine:3.19
@@ -12,6 +12,6 @@ FROM alpine:3.19
 WORKDIR /app
 COPY --from=build /app/whatsmyip .
 
-EXPOSE 8080
+EXPOSE 9977
 
 CMD ["./whatsmyip"]
